@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
+from tkinter import messagebox
 
 def create_table():
     conn = sqlite3.connect('movie_detail.db')
@@ -20,6 +21,12 @@ def add_movie():
     genre = genre_combobox.get()
     language = language_combobox.get()
     show_time = show_time_combobox.get()
+
+    if not (name and genre and language and show_time):
+        messagebox.showerror("Error", "Please don't leave any fields empty")
+        return
+
+
     conn = sqlite3.connect('movie_detail.db')
     c = conn.cursor()
     c.execute("INSERT INTO movie (name, genre, language, show_time) VALUES (?, ?, ?, ?)", (name, genre, language, show_time))

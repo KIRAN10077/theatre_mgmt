@@ -87,6 +87,9 @@ def register():
         messagebox.showerror("Error", "Please agree to the Terms and Conditions")
         return
     
+    if len(mobile)!=10:
+        messagebox.showerror("Error","Please enter a valid phone number.")
+    
 
     # Insert user details into the database
     c.execute("INSERT INTO regd_users (username, email, mobile, password) VALUES (?, ?, ?, ?)", (username, email, mobile, password))

@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
+from tkinter import messagebox
 
 def create_table():
     conn = sqlite3.connect('item_detail.db')
@@ -18,6 +19,11 @@ def add_item():
     item = item_entry.get()
     category = category_combobox.get()
     rate = rate_entry.get()
+
+    if not (item and category and rate):
+        messagebox.showerror("Error", "Please don't leave any fields empty")
+        return
+    
     conn = sqlite3.connect('item_detail.db')
     c = conn.cursor()
     c.execute("INSERT INTO item (item, category, rate) VALUES (?, ?, ?)", (item, category, rate))

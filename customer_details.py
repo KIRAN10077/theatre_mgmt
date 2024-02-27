@@ -25,7 +25,11 @@ def add_customer():
     contact_no = contact_entry.get()
 
     if not (seat_booked and name and contact_no):
-        messagebox.showerror("Error", "Please enter valid information.")
+        messagebox.showerror("Error", "Please don't leave any fields empty")
+        
+    
+    if (not isinstance(seat_booked,int) or len(contact_no)!=10 ):
+        messagebox.showerror("Error","Please enter correct credentials.")
         return
 
     conn = sqlite3.connect('customer_detail.db')

@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
+from tkinter import messagebox
 
 def create_table():
     conn = sqlite3.connect('staff_detail.db')
@@ -18,6 +19,14 @@ def add_staff():
     name = name_entry.get()
     contact = contact_entry.get()
     staff_type = staff_type_var.get()
+
+    if not (name and contact and staff_type):
+        messagebox.showerror("Error", "Please don't leave any fields empty")
+        return
+    
+    if (len(contact)!=10 ):
+        messagebox.showerror("Error","Please enter valid credentials.")
+        return
 
     conn = sqlite3.connect('staff_detail.db')
     c = conn.cursor()
