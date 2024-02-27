@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import sqlite3
 from tkinter import messagebox
+from PIL import Image, ImageTk
 
 # Maximum number of seats
 MAX_SEATS = 100
@@ -157,22 +158,24 @@ def main():
     root = tk.Tk()
     root.title("Customer Details Management")
 
+    
+
     data_entry_frame = tk.LabelFrame(root, text="Enter Customer Detail")
     data_entry_frame.pack(padx=10, pady=10)
     
-    tk.Label(data_entry_frame, text="Name:").grid(row=0, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(data_entry_frame, text="Name:").grid(row=0, column=0, padx=5, pady=5, sticky="w")
     name_entry = tk.Entry(data_entry_frame)
     name_entry.grid(row=0, column=1, padx=5, pady=5)
 
-    tk.Label(data_entry_frame, text="seat_booked:").grid(row=1, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(data_entry_frame, text="seat_booked:").grid(row=1, column=0, padx=5, pady=5, sticky="w")
     seat_booked_entry = tk.Entry(data_entry_frame)
     seat_booked_entry.grid(row=1, column=1, padx=5, pady=5)
 
-    tk.Label(data_entry_frame, text="Contact:").grid(row=2, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(data_entry_frame, text="Contact:").grid(row=2, column=0, padx=5, pady=5, sticky="w")
     contact_entry = tk.Entry(data_entry_frame)
     contact_entry.grid(row=2, column=1, padx=5, pady=5)
 
-    add_button = tk.Button(data_entry_frame, text="Add Customer",command=add_customer)
+    add_button = tk.Button(data_entry_frame, text="Book Customer",command=add_customer)
     add_button.grid(row=3, columnspan=2, padx=5, pady=5)
 
     display_frame = tk.LabelFrame(root, text="Customer Details")
@@ -190,7 +193,7 @@ def main():
     edit_button = tk.Button(root, text="Edit Selected", command=on_edit)
     edit_button.pack(pady=5)
 
-    delete_button = tk.Button(root, text="Delete Selected", command=delete_customer)
+    delete_button = tk.Button(root, text="cancel book", command=delete_customer)
     delete_button.pack(pady=5)
 
     remaining_seats_label = tk.Label(root, text="")
