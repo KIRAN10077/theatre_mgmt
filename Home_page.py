@@ -21,6 +21,11 @@ def logout():
     messagebox.showwarning("WARNING","are you sure you want to logout?")
     home.destroy()
     import Login_page
+
+def menu_page():
+    home.destroy()
+    import menu_manager
+    menu_manager.main()
     
 
 home = Tk()
@@ -56,10 +61,10 @@ staff_icon = PhotoImage(file="stafflogo.png")
 manage_staffs = Button(home, text=("MANAGE \n STAFFS"), fg="Black", font=("Arial", 20, "bold italic"),compound="bottom",image=staff_icon,cursor="hand2",command=staffs_details_page)  
 manage_staffs.place(x=630, y=160, height=290, width=170)
 
-# Button to navigate to settings page
-settings_icon = PhotoImage(file="settingslogo.png")
-settings = Button(home, text=("SETTINGS"), fg="Black", font=("Arial", 20, "bold italic"),compound="bottom",image=settings_icon,cursor="hand2")
-settings.place(x=810, y=160, height=290, width=140)
+# Button to navigate to menu manager page
+menu_icon = PhotoImage(file="menulogo.png")
+menu = Button(home, text=("MENU"), fg="Black", font=("Arial", 20, "bold italic"),compound="bottom",image=menu_icon,cursor="hand2",command=menu_page)
+menu.place(x=810, y=160, height=290, width=140)
 
 # Logout button
 logout_icon = PhotoImage(file= "logoutlogo.png")
