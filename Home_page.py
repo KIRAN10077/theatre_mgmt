@@ -53,7 +53,7 @@ movie_details_btn.place(x=270, y=160, height=290, width=170)
 
 # Button to navigate to customer details page
 customer_icon = PhotoImage(file="customerlogo.png")
-customer_details_btn = Button(home, text=("CUSTOMER \n DETAILS"), fg="Black", font=("Arial", 20, "bold italic"),cursor="hand2",compound="bottom",image=customer_icon,command=cus_details_page)
+customer_details_btn = Button(home, text=("BOOKED \n DETAILS"), fg="Black", font=("Arial", 20, "bold italic"),cursor="hand2",compound="bottom",image=customer_icon,command=cus_details_page)
 customer_details_btn.place(x=450, y=160, height=290, width=170)
 
 # Button to navigate to staff details page
@@ -63,7 +63,7 @@ manage_staffs.place(x=630, y=160, height=290, width=170)
 
 # Button to navigate to menu manager page
 menu_icon = PhotoImage(file="menulogo.png")
-menu = Button(home, text=("MENU"), fg="Black", font=("Arial", 20, "bold italic"),compound="bottom",image=menu_icon,cursor="hand2",command=menu_page)
+menu = Button(home, text=("MENU\nEDITOR"), fg="Black", font=("Arial", 20, "bold italic"),compound="bottom",image=menu_icon,cursor="hand2",command=menu_page)
 menu.place(x=810, y=160, height=290, width=140)
 
 # Logout button
