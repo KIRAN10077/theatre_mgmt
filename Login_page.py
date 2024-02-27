@@ -125,7 +125,7 @@ def forget_pass():
     window.resizable(0, 0)
     window.title("RESET PASSWORD")
 
-    heading_lvl = Label(window, text="CHANGE PASSWORD", bg='white', font=("Arial", 30, "bold"))
+    heading_lvl = Label(window, text="CHANGE PASSWORD", bg='white', font=("Times New Roman", 30, "bold"))
     heading_lvl.place(x=465, y=10)
 
     _email = Label(window, text="Email", bg='white', font=("Arial", 15, "bold"))
