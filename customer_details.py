@@ -3,7 +3,8 @@ from tkinter import ttk
 import sqlite3
 from tkinter import messagebox
 
-
+# Maximum number of seats
+MAX_SEATS = 100
 
 def create_table():
     conn = sqlite3.connect('customer_detail.db')
@@ -22,12 +23,9 @@ def add_customer():
     seat_booked = seat_booked_entry.get()
     contact_no = contact_entry.get()
 
-    contact = contact_entry.get()
-    if ((not seat_booked) or (not name) or (not contact_no) ):
-        messagebox.showerror("Error", "Please enter the valid information.")
+    if not (seat_booked and name and contact_no):
+        messagebox.showerror("Error", "Please enter valid information.")
         return
-    else:
-        messagebox.showinfo("Success!",f"Customer with {seat_booked} no. of seats booked Successfully!")
 
     conn = sqlite3.connect('customer_detail.db')
     c = conn.cursor()
@@ -38,13 +36,13 @@ def add_customer():
     if total_booked_seats is None:
         total_booked_seats = 0
 
-    if total_booked_seats + int(seat_booked) > 20:
-        messagebox.showerror("Error", "No seats available at the moment. Sorry for the inconvenience.")
+    if total_booked_seats + int(seat_booked) > MAX_SEATS:
+        messagebox.showerror("Error", f"No seats available at the moment. Maximum seats allowed: {MAX_SEATS}")
         return
 
     conn = sqlite3.connect('customer_detail.db')
     c = conn.cursor()
-    c.execute("INSERT INTO customer (name, seat_booked, contact) VALUES (?, ?, ?)", (name, seat_booked, contact))
+    c.execute("INSERT INTO customer (name, seat_booked, contact) VALUES (?, ?, ?)", (name, seat_booked, contact_no))
     conn.commit()
     conn.close()
     clear_entries()
@@ -142,7 +140,7 @@ def update_remaining_seats():
     if total_booked_seats is None:
         total_booked_seats = 0
 
-    remaining_seats = 20 - total_booked_seats
+    remaining_seats = MAX_SEATS - total_booked_seats
     remaining_seats_label.config(text=f"Total seats remaining: {remaining_seats}")
 
 
@@ -174,7 +172,7 @@ def main():
     contact_entry = tk.Entry(data_entry_frame)
     contact_entry.grid(row=2, column=1, padx=5, pady=5)
 
-    add_button = tk.Button(data_entry_frame, text="Add Customer", bg="green" ,command=add_customer)
+    add_button = tk.Button(data_entry_frame, text="Add Customer",command=add_customer)
     add_button.grid(row=3, columnspan=2, padx=5, pady=5)
 
     display_frame = tk.LabelFrame(root, text="Customer Details")
@@ -189,18 +187,19 @@ def main():
 
     customers_tree.bind("<Double-1>", on_edit)
 
-    edit_button = tk.Button(root, text="Edit Selected",bg = "yellow", command=on_edit)
+    edit_button = tk.Button(root, text="Edit Selected", command=on_edit)
     edit_button.pack(pady=5)
 
-    delete_button = tk.Button(root, text="Delete Selected",bg="orange", command=delete_customer)
+    delete_button = tk.Button(root, text="Delete Selected", command=delete_customer)
     delete_button.pack(pady=5)
 
     remaining_seats_label = tk.Label(root, text="")
     remaining_seats_label.pack(pady=5)
 
     update_remaining_seats()
+    show_customers()
 
-    back = tk.Button(root, text="Back", bg="gray70",command=backk)
+    back = tk.Button(root, text="Back", command=backk)
     back.pack(pady=5)  
 
     root.mainloop()
