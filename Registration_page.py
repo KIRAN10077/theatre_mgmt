@@ -9,7 +9,7 @@ a.config(bg = "white")
 a.geometry("1000x600")
 a.title("REGISTRATION FORM")
 a.iconbitmap("logg.ico")
-a.resizable(0,0)
+
 
 
 Label(a, text = "REGISTER",bg = "white", font=("Times New Roman",40, "bold")).place(x = 600, y = 0)
@@ -89,6 +89,7 @@ def register():
     
     if len(mobile)!=10:
         messagebox.showerror("Error","Please enter a valid phone number.")
+        return
     
 
     # Insert user details into the database
